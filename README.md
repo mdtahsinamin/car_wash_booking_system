@@ -16,7 +16,7 @@ This project involves create an online booking system for car wash service. The 
 
 - `User Management`: User registration and authentication for both admins and regular users.
 - `Service Management`: Admins can create, update, retrieve, and delete car wash services.
-- ` Slot Management`: Admins can create and manage service slots for booking.
+- `Slot Management`: Admins can create and manage service slots for booking.
 - `Booking System`: Users can view available slots and book services.
 - `Availability Check`: Users and admins can check available slots for specific services and dates.
 
@@ -64,21 +64,21 @@ Follow these steps to set up the application on your local machine
 
 1. Clone the repository
 
-```bash
+```js
   git clone https://github.com/mdtahsinamin/car_wash_booking_system.git
   cd car_wash_booking_system_master
 ```
 
 2. Install dependencies
 
-```bash
+```js
  npm install
 ```
 
 3. Set up environment variables:
    Create a .env file in the root directory and add the following:
 
-```bash
+```ts
 PORT=
 NODE_ENV=
 MONGODB_URL=
