@@ -17,7 +17,7 @@ router.post(
 );
 router.get('/:id', ServicesControllers.getSingleService);
 
-router.get('/', auth(), ServicesControllers.getAllServices);
+router.get('/', ServicesControllers.getAllServices);
 
 router.put(
   '/:id',
