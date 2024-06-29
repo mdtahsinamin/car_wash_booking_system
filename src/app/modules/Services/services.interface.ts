@@ -9,5 +9,5 @@ export interface TServices {
 }
 
 export interface ServiceModel extends Model<TServices> {
-  isServiceExists(id: string): Promise<TServices>;
+  isServiceExists(id: string): Promise<TServices | null>;
 }
