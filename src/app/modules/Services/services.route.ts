@@ -7,7 +7,7 @@ import { SlotControllers } from '../Slot/slot.controller';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../User/user.constant';
 
-//! admin
+
 const router = express.Router();
 
 router.post(
