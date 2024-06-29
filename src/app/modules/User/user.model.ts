@@ -46,11 +46,20 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// password hide
 userSchema.post('save', async function (doc, next) {
   doc.password = '';
   next();
 });
 
+// user exists or not
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  const isUserExists = await User.findOne({ email }).select('+password');
+
+  return isUserExists;
+};
+
+// password match
 userSchema.statics.isPasswordMatch = async function (
   plainTextPassword: string,
   hashedPassword: string,

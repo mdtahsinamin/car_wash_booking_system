@@ -20,9 +20,9 @@ const getSingleService = catchAsync(async (req, res) => {
   const result = await WashingServices.getSingleServiceFromDB(id);
 
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Service retrieved successfully',
+    success: result ? true : false,
+    statusCode: result ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: result ? 'Service retrieved successfully' : 'No Data Found',
     data: result,
   });
 });
@@ -31,9 +31,10 @@ const getAllServices = catchAsync(async (req, res) => {
   const result = await WashingServices.getAllServicesFromDB(req.query);
 
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Services retrieved successfully',
+    success: result.length > 0 ? true : false,
+    statusCode: result.length > 0 ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message:
+      result.length > 0 ? 'Services retrieved successfully' : 'No Data Found',
     data: result,
   });
 });
