@@ -64,14 +64,14 @@ Follow these steps to set up the application on your local machine
 
 1. Clone the repository
 
-```js
+```bash
   git clone https://github.com/mdtahsinamin/car_wash_booking_system.git
   cd car_wash_booking_system_master
 ```
 
 2. Install dependencies
 
-```js
+```bash
  npm install
 ```
 
