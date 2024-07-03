@@ -6,5 +6,9 @@ export const generateAccessToken = async (
   secret: string,
   expiresIn: string,
 ) => {
-  return await jwt.sign(jwtPayload, secret, { expiresIn });
+  return jwt.sign(jwtPayload, secret, {
+    expiresIn,
+  });
 };
+
+// jwtPayload, secret, { expiresIn }

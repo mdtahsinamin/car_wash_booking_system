@@ -8,12 +8,12 @@ import AppError from '../errors/AppError';
 import { TUserRole } from '../modules/User/user.interface';
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1] as string;
 
-    const decoded = (await jwt.verify(
-      token as string,
+    const decoded = jwt.verify(
+      token,
       config.jwt_secret as string,
-    )) as JwtPayload;
+    ) as JwtPayload;
 
     const user = await User.findById({ _id: decoded?.userId });
 
