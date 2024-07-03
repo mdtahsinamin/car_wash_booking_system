@@ -8,7 +8,7 @@ const getMyBooking = async (user: JwtPayload) => {
   const isUserExists = await User.findById({ _id: user?.userId });
 
   if (!isUserExists) {
-    throw new AppError(httpStatus.NOT_FOUND, 'user is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
   const result = await Booking.find({ customer: user?.userId })

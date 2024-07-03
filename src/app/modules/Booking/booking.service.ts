@@ -15,7 +15,7 @@ const createBookingIntoDB = async (user: JwtPayload, payload: TBooking) => {
   const isUserExists = await User.findById({ _id: user?.userId });
 
   if (!isUserExists) {
-    throw new AppError(httpStatus.NOT_FOUND, 'user is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
   // set the customer id
@@ -27,7 +27,7 @@ const createBookingIntoDB = async (user: JwtPayload, payload: TBooking) => {
   );
 
   if (!isServiceExists) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Service is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
   // slot exists or not
@@ -35,7 +35,7 @@ const createBookingIntoDB = async (user: JwtPayload, payload: TBooking) => {
   const isSlotExist = await Slot.findById({ _id: payload?.slotId });
 
   if (!isSlotExist) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Slot is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
   // slot booked or not
   if (isSlotExist?.isBooked === 'booked') {

@@ -15,7 +15,7 @@ const loginUser = async (payload: TAuth) => {
   let user = await User.isUserExistsByEmail(payload?.email);
 
   if (!user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
   if (!(await User.isPasswordMatch(payload?.password, user.password))) {

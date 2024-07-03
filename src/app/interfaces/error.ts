@@ -8,3 +8,10 @@ export type TErrorResponse = {
   message: string;
   errorMessages: TErrorMessage;
 };
+
+export type TAppErrorResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data?: [];
+};

@@ -11,7 +11,7 @@ const createSlotIntoDB = async (payload: TSlot) => {
   const service = await Services.findById(payload?.service);
 
   if (!service) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Service not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
   const slotTimeIntervals = generateSlotWithTimeInterval(

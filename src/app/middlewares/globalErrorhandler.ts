@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ErrorRequestHandler } from 'express';
-import { TErrorMessage } from '../interfaces/error';
+import { TAppErrorResponse, TErrorMessage } from '../interfaces/error';
 import { ZodError } from 'zod';
 import handleZodError from '../errors/handleZodError';
 import config from '../config';
@@ -52,14 +52,14 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   }
   // AppError
   else if (err instanceof AppError) {
-    statusCode = err.statusCode;
-    message = err.message;
-
-    return res.status(statusCode).json({
+    const AppErrorResponse: TAppErrorResponse = {
       success: false,
-      statusCode,
-      message,
-    });
+      statusCode: err.statusCode,
+      message: err.message,
+      data: err?.statusCode === 404 ? [] : undefined,
+    };
+
+    return res.status(statusCode).json(AppErrorResponse);
   }
 
   return res.status(statusCode).json({

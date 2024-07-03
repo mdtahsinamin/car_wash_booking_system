@@ -18,7 +18,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     const user = await User.findById({ _id: decoded?.userId });
 
     if (!user) {
-      throw new AppError(httpStatus.NOT_FOUND, 'This user is not found');
+      throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
     }
 
     if (requiredRoles && !requiredRoles.includes(user?.role)) {
