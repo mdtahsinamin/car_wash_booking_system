@@ -30,16 +30,27 @@ const createBookingIntoDB = async (user: JwtPayload, payload: TBooking) => {
     throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
   }
 
+  if (isServiceExists?.isDeleted) {
+    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
+  }
+
   // slot exists or not
 
   const isSlotExist = await Slot.findById({ _id: payload?.slotId });
 
   if (!isSlotExist) {
-    throw new AppError(httpStatus.NOT_FOUND, 'No Data Found');
+    throw new AppError(httpStatus.NOT_FOUND, 'Not Data Found');
   }
   // slot booked or not
   if (isSlotExist?.isBooked === 'booked') {
-    throw new AppError(httpStatus.BAD_REQUEST, 'Slot is not already booked');
+    throw new AppError(httpStatus.BAD_REQUEST, 'Slot is already booked');
+  }
+
+  if (isSlotExist?.service !== payload?.serviceId) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      'Slot of this service is not match',
+    );
   }
 
   const session = await mongoose.startSession();

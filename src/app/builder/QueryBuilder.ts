@@ -12,6 +12,7 @@ class QueryBuilder<T> {
   // search
   search(searchableFields: string[]) {
     const searchTerm = this?.query?.searchTerm;
+    const date = this?.query?.date;
 
     if (searchTerm) {
       this.modelQuery = this.modelQuery.find({
@@ -22,14 +23,34 @@ class QueryBuilder<T> {
             }) as FilterQuery<T>,
         ),
       });
+    } else if (date) {
+      this.modelQuery = this.modelQuery.find({
+        $or: searchableFields.map(
+          (field) =>
+            ({
+              [field]: { $regex: date },
+            }) as FilterQuery<T>,
+        ),
+      });
     }
     return this;
   }
 
   filter() {
     const queryObj = { ...this.query };
+    if (queryObj?.serviceId) {
+      queryObj.service = queryObj?.serviceId;
+    }
 
-    const excludeFields = ['searchTerm', 'limit', 'sort', 'page', 'fields'];
+    const excludeFields = [
+      'searchTerm',
+      'limit',
+      'sort',
+      'page',
+      'fields',
+      'date',
+      'serviceId',
+    ];
 
     excludeFields.forEach((elt) => delete queryObj[elt]);
 
