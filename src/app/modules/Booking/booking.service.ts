@@ -46,7 +46,7 @@ const createBookingIntoDB = async (user: JwtPayload, payload: TBooking) => {
     throw new AppError(httpStatus.BAD_REQUEST, 'Slot is already booked');
   }
 
-  if (isSlotExist?.service !== payload?.serviceId) {
+  if (`${isSlotExist?.service}` !== payload?.serviceId) {
     throw new AppError(
       httpStatus.BAD_REQUEST,
       'Slot of this service is not match',
